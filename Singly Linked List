@@ -218,4 +218,5 @@ int main()
 	cout << linear_search(&head, 2)<<endl;//Linear Search
 	sort(&head);						  //Sort				  
 	display(&head);
+	return 0;
 }

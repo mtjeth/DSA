@@ -215,7 +215,7 @@ int main()
 	display(&head);
 	delete_back(&head);					  //Delete at Back
 	display(&head);
-	cout << linear_search(&head, 2)<<endl;//Linear Search
+	cout << linear_search(&head, 2)<<endl;//Linear Search     //Search
 	sort(&head);						  //Sort				  
 	display(&head);
 	return 0;

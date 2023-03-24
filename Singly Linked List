@@ -1,0 +1,221 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+class Node
+{
+	public:
+		int data;
+	class Node* next;
+};
+
+void display(class Node** head,int position = 0)
+{
+	if (*head == NULL)
+	{
+		cout << "Empty List" << endl;
+	}
+	else
+	{
+		if (position == 0)
+		{
+			class Node* temp = *head;
+			while (temp->next != NULL)
+			{
+				cout << temp->data << "\t";
+				temp = temp->next;
+			}
+			cout << temp->data << endl;
+		}
+		else
+		{
+			if (position == 1)
+				cout << head << endl;
+			else
+			{
+				class Node* temp = *head;
+				for (int i = 2; i <= position; i++)
+					if (temp->next != NULL)
+						temp = temp->next;
+				cout << temp->data << endl;
+			}
+		}
+	}
+}
+
+void insert_front(class Node **head , int data )
+{
+	class Node *newNode = (class Node *)malloc(sizeof(class Node));
+	newNode->data = data;
+	newNode->next = *head;
+	*head = newNode;
+}
+
+void delete_front(class Node** head)
+{
+	if (*head == NULL)
+	{
+		cout << "Empty List" << endl;
+		exit(0);
+	}
+	else
+		*head = (*head)->next;
+}
+
+void insert_back(class Node** head, int data)
+{
+	class Node* newNode = (class Node*)malloc(sizeof(class Node));
+	newNode->data = data;
+	newNode->next = NULL;
+	if (*head == NULL)
+	{
+		*head = newNode;
+	}
+	else
+	{
+	class Node* temp = *head;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = newNode;
+	}
+}
+
+void delete_back(class Node** head)
+{
+	if (*head == NULL)
+	{
+		cout << "Empty List" << endl;
+		exit(0);
+	}
+	else
+	{
+		class Node* temp = *head;
+		while (temp->next->next != NULL)
+			temp = temp->next;
+		temp->next = NULL;
+	}
+}
+
+void insert_middle(class Node** head, int position, int data)
+{
+	class Node* newNode = (class Node*)malloc(sizeof(class Node));
+	newNode->data = data;
+	newNode->next = NULL;
+	if (*head == NULL)
+	{
+		*head = newNode;
+	}
+	else
+	{
+		if (position == 1)
+			insert_front(head, data);
+		else
+		{
+			class Node* temp = *head;
+			for (int i = 2; i < position; i++)
+				if (temp->next != NULL)
+					temp = temp->next;
+			newNode->next = temp->next;
+			temp->next = newNode;
+		}
+	}
+}
+
+void delete_middle(class Node** head, int position)
+{
+	if (*head == NULL)
+	{
+		cout << "Empty List" << endl;
+		exit(0);
+	}
+	else
+	{
+		class Node* temp = *head;
+		for (int i = 2; i < position; i++)
+			if (temp->next != NULL)
+				temp = temp->next;
+
+		temp->next= temp->next->next;
+	}
+}
+
+int linear_search(class Node** head, int key)
+{
+	if (*head == NULL)
+	{
+		return -1;
+	}
+	else
+	{
+		int count = 1;
+		class Node* temp = *head;
+		while (temp->next != NULL)
+		{
+			if (temp->data == key)
+				return count;
+			else
+			{
+				count++;
+				temp = temp->next;
+			}
+		}
+		if (temp->data == key)
+			return count;
+		else
+			return -1;
+	}
+}
+
+void sort(class Node** head)
+{
+	class Node* temp = *head;
+	int count = 1;
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+		count++;
+	}
+	temp = *head;
+	int swap;
+	for (int i = 1; i < count + 1; i++)
+	{
+		while (temp->next != NULL)
+		{
+			if (temp->data > temp->next->data)
+			{
+				swap = temp->data;
+				temp->data = temp->next->data;
+				temp->next->data = swap;
+			}
+			temp = temp->next;
+		}
+		temp = *head;
+	}
+}
+
+int main()
+{
+	class Node* head = NULL;
+	display(&head);
+	for (int i = 10; i > 0; i--)
+		insert_front(&head, i);           //Insert at Front
+	display(&head);
+	display(&head,5);
+	delete_front(&head);				  //Delete at Front
+	display(&head);
+	display(&head, 5);
+	insert_middle(&head, 5, 6);			  //Insert at position 5
+	display(&head);
+	display(&head, 5);
+	delete_middle(&head, 5);			  //Delete at position 5
+	display(&head);
+	display(&head, 5);
+	insert_back(&head, 4);				  //Insert at Back
+	display(&head);
+	delete_back(&head);					  //Delete at Back
+	display(&head);
+	cout << linear_search(&head, 2)<<endl;//Linear Search
+	sort(&head);						  //Sort				  
+	display(&head);
+}

@@ -1,0 +1,144 @@
+#include <iostream>
+
+using namespace std;
+
+struct node
+{
+	int data;
+	struct node* next;
+};
+
+void insert_empty(struct node** head, int data)
+{
+	struct node* newnode = new node;
+	newnode->data = data;
+	newnode->next = newnode;
+	*head = newnode;
+}
+
+void insert_front(struct node** head, int data)
+{
+	if (*head == NULL)
+		insert_empty(head, data);
+	else
+	{
+		struct node* newnode = new node;
+		struct node* tempnode = new node;
+		tempnode = *head;
+		newnode->data = data;
+		newnode->next = *head;
+		while (tempnode->next != *head)
+			tempnode = tempnode->next;
+		tempnode->next = newnode;
+		*head = newnode;
+	}
+}
+
+void delete_front(struct node** head)
+{
+	if (*head != NULL)
+	{
+		struct node* tempnode = new node;
+		tempnode = *head;
+		while (tempnode->next != *head)
+			tempnode = tempnode->next;
+		tempnode->next = (*head)->next;
+		*head = (*head)->next;
+	}
+	else
+		cout << "empty list" << endl;
+}
+
+void insert_back(struct node** head, int data)
+{
+	if (*head == NULL)
+		insert_empty(head, data);
+	else
+	{
+		struct node* newnode = new node;
+		struct node* tempnode = new node;
+		tempnode = *head;
+		newnode->data = data;
+		while (tempnode->next != *head)
+			tempnode = tempnode->next;
+		tempnode->next = newnode;
+		newnode->next = *head;
+	}
+}
+
+void delete_back(struct node** head)
+{
+	if (*head != NULL)
+	{
+		struct node* tempnode = new node;
+		while (tempnode->next->next != *head)
+			tempnode = tempnode->next;
+		tempnode->next = *head;
+	}
+	else
+		cout << "Empty List" << endl;
+}
+
+void insert_middle(struct node** head, int data, int position)
+{
+	if (*head == NULL)
+		insert_empty(head, data);
+	else if (position == 1)
+		insert_front(head, data);
+	else
+	{
+		struct node* newnode = new node;
+		struct node* tempnode = new node;
+		tempnode = *head;
+		newnode->data = data;
+		for (int i = 2; i < position; i++)
+			tempnode = tempnode->next;
+		newnode->next = tempnode->next;
+		tempnode->next = newnode;
+	}
+}
+
+void delete_middle(struct node** head, int position)
+{
+	if (*head == NULL)
+		cout << "Empty List" << endl;
+	else if (position == 1)
+		delete_front(head);
+	else
+	{
+		struct node* tempnode = new node;
+		tempnode = *head;
+		for (int i = 2; i < position; i++)
+			tempnode = tempnode->next;
+		tempnode->next = tempnode->next->next;
+	}
+}
+
+void display(struct node** head)
+{
+	if (*head != NULL)
+	{
+		struct node* tempnode = *head;
+		while (tempnode->next != *head)
+		{
+			cout << tempnode->data << " ==> ";
+			tempnode = tempnode->next;
+		}
+		cout << tempnode->data << endl;
+	}
+	else
+		cout << "empty list" << endl;
+}
+
+int main()
+{
+	struct node* head = NULL;
+	insert_empty(&head, 30);
+	insert_front(&head, 20);
+	insert_front(&head, 10);
+	insert_back(&head, 40);
+	insert_back(&head, 60);
+	insert_middle(&head, 50, 5);
+	cout << "The circular linked list created is as follows:" << endl;
+	display(&head);
+}

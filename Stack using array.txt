@@ -1,0 +1,289 @@
+Using Array
+#3.Write a C++ program to sort a given stack (using an array) using another stack.
+
+#include <iostream>
+
+#define MAX 1000
+
+using namespace std;
+
+class Stack
+{
+	int top;
+public:
+	int myStack[MAX];
+
+	Stack() { top = -1; }
+	bool push(int x);
+	int pop();
+	bool isEmpty();
+};
+
+bool Stack::push(int item)
+{
+	if (top >= (MAX - 1)) {
+		cout << "Stack Overflow!!!";
+		return false;
+	}
+	else {
+		myStack[++top] = item;
+		return true;
+	}
+}
+
+int Stack::pop()
+{
+	if (top < 0) {
+		cout << "Stack Underflow!!";
+		return 0;
+	}
+	else {
+		int item = myStack[top--];
+		return item;
+	}
+}
+
+bool Stack::isEmpty()
+{
+	return (top < 0);
+}
+
+int main()
+{
+	class Stack stack1;
+	class Stack stack2;
+	int nums[] = { 58,48,23,4,56,79,12,36,78,75 }, temp1, temp2;
+	cout<<"Stack is"<<endl;
+	for (int i = 0; i < 10; i++)
+	{
+		stack1.push(nums[i]);
+		cout<<nums[i]<<endl;
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		temp1 = stack1.pop();
+		for (int j = 0; j < 9; j++)
+		{
+			temp2 = stack1.pop();
+			if (temp2 < temp1)
+				stack2.push(temp2);
+			else {
+				stack2.push(temp1);
+				temp1 = temp2;
+			}
+		}
+		stack2.push(temp1);
+		while (!stack2.isEmpty())
+			stack1.push(stack2.pop());
+	}
+	cout<<"stack sorted"<<endl;
+	while (!stack1.isEmpty())
+		cout << stack1.pop() << endl;
+}
+
+#4.Write a program that reads in a sequence of characters and prints them in  reverse order.  Use a stack.
+
+#include <iostream>
+
+#define MAX 1000
+
+using namespace std; 
+
+class Stack
+{
+	int top;
+public:
+	int myStack[MAX];
+
+	Stack() { top = -1; }
+	bool push(int x);
+	int pop();
+	bool isEmpty();
+};
+
+
+bool Stack::push(int item)
+{
+	if (top >= (MAX - 1)) {
+		cout << "Stack Overflow!!!";
+		return false;
+	}
+	else {
+		myStack[++top] = item;
+		return true;
+	}
+}
+
+int Stack::pop()
+{
+	if (top < 0) {
+		cout << "Stack Underflow!!";
+		return 0;
+	}
+	else {
+		int item = myStack[top--];
+		return item;
+	}
+}
+
+bool Stack::isEmpty()
+{
+	return (top < 0);
+}
+
+int main()
+{
+	class Stack stack1;
+	int nums[] = { 58,48,23,4,56,79,12,36,78,75 };
+	cout<<"stack is "<<endl;
+	for (int i = 0; i < 10; i++)
+	{
+		stack1.push(nums[i]);
+		cout << nums[i] << endl;
+	}
+	cout << "result is"<<endl;
+	while (!stack1.isEmpty())
+		cout << stack1.pop() << endl;
+	cout<<"print reverse is LiFO so just printing reverse stack"<<endl;
+}
+
+#5.Write a C++ program that reverses the stack (using an array) elements.
+
+#include <iostream>
+
+#define MAX 1000
+
+using namespace std; 
+
+class Stack
+{
+	int top;
+public:
+	int myStack[MAX];
+
+	Stack() { top = -1; }
+	bool push(int x);
+	int pop();
+	bool isEmpty();
+};
+
+
+bool Stack::push(int item)
+{
+	if (top >= (MAX - 1)) {
+		cout << "Stack Overflow!!!";
+		return false;
+	}
+	else {
+		myStack[++top] = item;
+		return true;
+	}
+}
+
+int Stack::pop()
+{
+	if (top < 0) {
+		cout << "Stack Underflow!!";
+		return 0;
+	}
+	else {
+		int item = myStack[top--];
+		return item;
+	}
+}
+
+bool Stack::isEmpty()
+{
+	return (top < 0);
+}
+
+int main()
+{
+	class Stack stack1,temp1,temp2;
+	int nums[] = { 58,48,23,4,56,79,12,36,78,75 };
+	cout <<"Stack is "<<endl;
+	for (int i = 0; i < 10; i++)
+	{
+		stack1.push(nums[i]);
+		cout << nums[i] << endl;
+	}
+	cout << "\n \n";
+	while (!stack1.isEmpty())
+		temp1.push(stack1.pop());
+	while (!temp1.isEmpty())
+		temp2.push(temp1.pop());
+	while (!temp2.isEmpty())
+		stack1.push(temp2.pop());
+	while (!stack1.isEmpty())
+		cout << stack1.pop() << endl;
+	cout<<"N.B :- it prints same because stack prints reverse so the stack is in reverse"<<endl;
+}
+
+#7.Write a C++ program to calculate the average value of the stack (using an array elements).
+
+#include <iostream>
+
+#define MAX 1000
+
+using namespace std; 
+
+class Stack
+{
+	int top;
+public:
+	int myStack[MAX];
+
+	Stack() { top = -1; }
+	bool push(int x);
+	int pop();
+	bool isEmpty();
+};
+
+
+bool Stack::push(int item)
+{
+	if (top >= (MAX - 1)) {
+		cout << "Stack Overflow!!!";
+		return false;
+	}
+	else {
+		myStack[++top] = item;
+		return true;
+	}
+}
+
+int Stack::pop()
+{
+	if (top < 0) {
+		cout << "Stack Underflow!!";
+		return 0;
+	}
+	else {
+		int item = myStack[top--];
+		return item;
+	}
+}
+
+bool Stack::isEmpty()
+{
+	return (top < 0);
+}
+
+int main()
+{
+	class Stack stack1;
+	int nums[] = { 58,48,23,4,56,79,12,36,78,75 },sum=0,count=0;
+	cout << "stack is " << endl;
+	for (int i = 0; i < 10; i++)
+	{
+		stack1.push(nums[i]);
+		cout << nums[i] << endl;
+	}
+	while (!stack1.isEmpty())
+	{
+		sum += stack1.pop();
+		count++;
+	}
+	cout << "Average is " << sum / count;
+}
+
